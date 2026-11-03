@@ -1,6 +1,6 @@
-dia,tipo,descanso,trabajo,atascos,personal
-Lunes,Teletrabajo,8,8,0,8
-Martes,Teletrabajo,8,8,0,8
-Miercoles,Presencial,8,8,2,6
-Jueves,Presencial,8,8,2,6
-Viernes,Presencial,8,8,1.5,6.5
+dia,tipo,descanso,atasco_ida,trabajo,atasco_vuelta,personal
+Lunes,Teletrabajo,8,0,8,0,8
+Martes,Teletrabajo,8,0,8,0,8
+Miercoles,Presencial,8,1.5,8,1.5,6
+Jueves,Presencial,8,1,8,1,6
+Viernes,Presencial,8,0.75,8,0.75,6.5

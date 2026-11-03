@@ -21,11 +21,11 @@ color colorCarretera = color(45, 55, 65);
 color colorLineaCarretera = color(235);
 
 // Tamaño del símbolo infinito
-float infinitoAncho = 330;
-float infinitoAlto = 150;
+float infinitoAncho = 300;
+float infinitoAlto = 110;
 
 // Posición vertical del infinito
-float infinitoY = 330;
+float infinitoY = 300;
 
 // Barra temporal
 float barraX = 150;
@@ -34,6 +34,6 @@ float barraAncho = 900;
 float barraAlto = 55;
 
 // Selector de días
-float selectorY = 750;
+float selectorY = 525;
 float anchoBotonDia = 150;
 float espacioBotones = 20;

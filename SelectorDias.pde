@@ -4,33 +4,20 @@
 
 void dibujarSelectorDias() {
 
-  float inicio =
-    calcularInicioSelector();
+  float inicio = calcularInicioSelector();
 
-
-  for (
-    int i = 0;
-    i < tabla.getRowCount();
-    i++
-  ) {
+  for (int i = 0; i < tabla.getRowCount(); i++) {
 
     float x =
-      inicio
-      + i
-      * (anchoBotonDia + espacioBotones);
+      inicio +
+      i * (anchoBotonDia + espacioBotones);
 
-
-    // Día seleccionado
-
+    // Fondo botón
     if (i == diaSeleccionado) {
-
       fill(60, 120, 220);
-
     } else {
-
-      fill(200);
+      fill(60, 70, 80);
     }
-
 
     noStroke();
 
@@ -38,29 +25,35 @@ void dibujarSelectorDias() {
       x,
       selectorY,
       anchoBotonDia,
-      38,
+      45,
       8
     );
 
-
-    // Texto
-
+    // Nombre del día
     if (i == diaSeleccionado) {
-
       fill(255);
-
     } else {
-
-      fill(40);
+      fill(220);
     }
 
-
+    textAlign(CENTER, CENTER);
     textSize(15);
 
     text(
-      tabla.getRow(i).getString("dia"),
+  tabla.getRow(i).getString("dia"),
       x + anchoBotonDia/2,
-      selectorY + 19
+      selectorY + 15
+    );
+
+    // Tipo de jornada
+    String tipo = tabla.getRow(i).getString("tipo");
+
+    textSize(11);
+
+    text(
+      "(" + tipo + ")",
+      x + anchoBotonDia/2,
+      selectorY + 32
     );
   }
 }
@@ -72,27 +65,19 @@ void dibujarSelectorDias() {
 
 void comprobarSeleccionDia() {
 
-  float inicio =
-    calcularInicioSelector();
+  float inicio = calcularInicioSelector();
 
-
-  for (
-    int i = 0;
-    i < tabla.getRowCount();
-    i++
-  ) {
+  for (int i = 0; i < tabla.getRowCount(); i++) {
 
     float x =
-      inicio
-      + i
-      * (anchoBotonDia + espacioBotones);
-
+      inicio +
+      i * (anchoBotonDia + espacioBotones);
 
     if (
-      mouseX >= x
-      && mouseX <= x + anchoBotonDia
-      && mouseY >= selectorY
-      && mouseY <= selectorY + 38
+      mouseX >= x &&
+      mouseX <= x + anchoBotonDia &&
+      mouseY >= selectorY &&
+      mouseY <= selectorY + 45
     ) {
 
       diaSeleccionado = i;
@@ -107,19 +92,11 @@ void comprobarSeleccionDia() {
 
 float calcularInicioSelector() {
 
-  return
+  return (
+    width -
     (
-      width
-      -
-      (
-        tabla.getRowCount()
-        * anchoBotonDia
-        +
-        (
-          tabla.getRowCount() - 1
-        )
-        * espacioBotones
-      )
+      tabla.getRowCount() * anchoBotonDia +
+      (tabla.getRowCount() - 1) * espacioBotones
     )
-    / 2;
+  ) / 2;
 }

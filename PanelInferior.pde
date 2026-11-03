@@ -8,20 +8,22 @@ void dibujarPanelInferior() {
 
   TableRow fila = obtenerDiaSeleccionado();
 
-  float descanso = fila.getFloat("descanso");
-  float trabajo = fila.getFloat("trabajo");
-  float atascos = fila.getFloat("atascos");
-  float personal = fila.getFloat("personal");
-
   String dia = fila.getString("dia");
   String tipo = fila.getString("tipo");
+
+  float descanso = fila.getFloat("descanso");
+  float atascoIda = fila.getFloat("atasco_ida");
+  float trabajo = fila.getFloat("trabajo");
+  float atascoVuelta = fila.getFloat("atasco_vuelta");
+  float personal = fila.getFloat("personal");
 
   dibujarDetalleDia(
     dia,
     tipo,
     descanso,
+    atascoIda,
     trabajo,
-    atascos,
+    atascoVuelta,
     personal
   );
 
@@ -34,23 +36,63 @@ void dibujarDetalleDia(
   String dia,
   String tipo,
   float descanso,
+  float atascoIda,
   float trabajo,
-  float atascos,
+  float atascoVuelta,
   float personal
 ) {
+
+  // Los rectángulos se dibujan desde la esquina superior izquierda
+  rectMode(CORNER);
+
+  // =====================================
+  // COMPROBACIÓN DE HORAS
+  // =====================================
+
+  float totalHoras =
+    descanso +
+    atascoIda +
+    trabajo +
+    atascoVuelta +
+    personal;
+
+  println(
+    dia +
+    " -> descanso: " + descanso +
+    ", atasco ida: " + atascoIda +
+    ", trabajo: " + trabajo +
+    ", atasco vuelta: " + atascoVuelta +
+    ", personal: " + personal +
+    ", TOTAL: " + totalHoras
+  );
+
+
+  // =====================================
+  // PANEL
+  // =====================================
 
   float x = 20;
   float y = 590;
   float w = 650;
   float h = 180;
 
-  // Panel
   fill(25, 39, 50);
   stroke(70, 90, 105);
   strokeWeight(1);
-  rect(x, y, w, h, 8);
 
-  // Título
+  rect(
+    x,
+    y,
+    w,
+    h,
+    8
+  );
+
+
+  // =====================================
+  // TÍTULO
+  // =====================================
+
   fill(255);
   textAlign(LEFT, CENTER);
   textSize(18);
@@ -63,22 +105,34 @@ void dibujarDetalleDia(
 
 
   // =====================================
-  // Barra de 24 horas
+  // BARRA DE 24 HORAS
   // =====================================
 
-  float barraX = x + 20;
-  float barraY = y + 48;
-  float barraW = 610;
+  float barraW = 450;
   float barraH = 35;
 
-  float escala = barraW / 24.0;
+  // Centrada dentro del panel
+  float barraX =
+    x + (w - barraW) / 2;
 
-  float actualX = barraX;
+  float barraY =
+    y + 48;
 
+  // Cada hora ocupa esta cantidad de píxeles
+  float escala =
+    barraW / 24.0;
 
-  // Descanso
-  fill(colorDescanso);
+  float actualX =
+    barraX;
+
   noStroke();
+
+
+  // -------------------------------------
+  // DESCANSO
+  // -------------------------------------
+
+  fill(colorDescanso);
 
   rect(
     actualX,
@@ -87,26 +141,34 @@ void dibujarDetalleDia(
     barraH
   );
 
-  actualX += descanso * escala;
+  actualX +=
+    descanso * escala;
 
 
-  // Atasco
-  if (atascos > 0) {
+  // -------------------------------------
+  // ATASCO DE IDA
+  // -------------------------------------
+
+  if (atascoIda > 0) {
 
     fill(colorAtasco);
 
     rect(
       actualX,
       barraY,
-      atascos * escala,
+      atascoIda * escala,
       barraH
     );
 
-    actualX += atascos * escala;
+    actualX +=
+      atascoIda * escala;
   }
 
 
-  // Trabajo
+  // -------------------------------------
+  // TRABAJO
+  // -------------------------------------
+
   fill(colorTrabajo);
 
   rect(
@@ -116,10 +178,34 @@ void dibujarDetalleDia(
     barraH
   );
 
-  actualX += trabajo * escala;
+  actualX +=
+    trabajo * escala;
 
 
-  // Personal
+  // -------------------------------------
+  // ATASCO DE VUELTA
+  // -------------------------------------
+
+  if (atascoVuelta > 0) {
+
+    fill(colorAtasco);
+
+    rect(
+      actualX,
+      barraY,
+      atascoVuelta * escala,
+      barraH
+    );
+
+    actualX +=
+      atascoVuelta * escala;
+  }
+
+
+  // -------------------------------------
+  // TIEMPO PERSONAL
+  // -------------------------------------
+
   fill(colorPersonal);
 
   rect(
@@ -131,75 +217,117 @@ void dibujarDetalleDia(
 
 
   // =====================================
-  // Marcas horarias
+  // MARCAS HORARIAS
   // =====================================
 
   fill(220);
   textSize(12);
   textAlign(CENTER, CENTER);
 
-  text("0:00", barraX, barraY + 55);
-  text("24:00", barraX + barraW, barraY + 55);
+  text(
+    "0:00",
+    barraX,
+    barraY + barraH + 18
+  );
+
+  text(
+    "24:00",
+    barraX + barraW,
+    barraY + barraH + 18
+  );
 
 
   // =====================================
-  // Datos inferiores
+  // DATOS INFERIORES
   // =====================================
 
-  float iconY = y + 125;
+  float iconY =
+    y + 130;
 
-  textSize(14);
+  textSize(13);
 
 
   // DESCANSO
   fill(colorDescanso);
-  ellipse(x + 55, iconY, 18, 18);
+  ellipse(
+    x + 55,
+    iconY,
+    18,
+    18
+  );
 
   fill(230);
   textAlign(LEFT, CENTER);
 
   text(
-    "Descanso\n" + descanso + " h",
-    x + 75,
+    "Descanso\n" +
+    descanso + " h",
+    x + 72,
     iconY
   );
 
 
   // TRABAJO
   fill(colorTrabajo);
-  rect(x + 210, iconY - 9, 18, 18, 3);
+
+  rect(
+    x + 210,
+    iconY - 9,
+    18,
+    18,
+    3
+  );
 
   fill(230);
 
   text(
-    "Trabajo\n" + trabajo + " h",
-    x + 240,
+    "Trabajo\n" +
+    trabajo + " h",
+    x + 235,
     iconY
   );
 
 
   // ATASCOS
+  float totalAtascos =
+    atascoIda +
+    atascoVuelta;
+
   fill(colorAtasco);
-  ellipse(x + 380, iconY, 18, 18);
+
+  ellipse(
+    x + 365,
+    iconY,
+    18,
+    18
+  );
 
   fill(230);
 
   text(
-    "Atascos\n" + atascos + " h",
-    x + 400,
+    "Atascos\n" +
+    totalAtascos + " h",
+    x + 382,
     iconY
   );
 
 
-  // PERSONAL
+  // TIEMPO PERSONAL
   fill(colorPersonal);
-  ellipse(x + 525, iconY, 18, 18);
+
+  ellipse(
+    x + 505,
+    iconY,
+    18,
+    18
+  );
 
   fill(230);
 
   text(
-    "Tiempo personal\n" + personal + " h",
-    x + 545,
+    "Personal\n" +
+    personal + " h",
+    x + 522,
     iconY
   );
 }
@@ -312,14 +440,18 @@ void dibujarResumenSemanal() {
   float totalDescanso = 0;
 
 
-  // Recorremos todos los días del CSV
-  for (int i = 0; i < tabla.getRowCount(); i++) {
-
-    TableRow fila = tabla.getRow(i);
+  // Recorremos una fila por cada día
+  for (TableRow fila : tabla.rows()) {
 
     totalTrabajo += fila.getFloat("trabajo");
-    totalAtascos += fila.getFloat("atascos");
+
+    totalAtascos +=
+      fila.getFloat("atasco_ida")
+      +
+      fila.getFloat("atasco_vuelta");
+
     totalPersonal += fila.getFloat("personal");
+
     totalDescanso += fila.getFloat("descanso");
   }
 
@@ -334,7 +466,7 @@ void dibujarResumenSemanal() {
   );
 
   dibujarDatoResumen(
-    "Desplazamientos",
+    "Atascos",
     totalAtascos,
     x,
     yTexto + 30

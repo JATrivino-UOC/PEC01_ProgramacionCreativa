@@ -20,22 +20,28 @@ void draw() {
 
   background(colorFondo);
 
-  // Obtenemos el día actualmente seleccionado
   TableRow fila = obtenerDiaSeleccionado();
 
   String dia = fila.getString("dia");
   String tipo = fila.getString("tipo");
 
   float descanso = fila.getFloat("descanso");
+  float atascoIda = fila.getFloat("atasco_ida");
   float trabajo = fila.getFloat("trabajo");
-  float atascos = fila.getFloat("atascos");
+  float atascoVuelta = fila.getFloat("atasco_vuelta");
   float personal = fila.getFloat("personal");
 
   dibujarTitulo(dia, tipo);
 
- dibujarInfinito(descanso, trabajo, atascos, personal);
+  dibujarInfinito(
+    descanso,
+    atascoIda,
+    trabajo,
+    atascoVuelta,
+    personal
+  );
 
- dibujarPanelInferior();
+  dibujarPanelInferior();
 }
 
 void mousePressed() {

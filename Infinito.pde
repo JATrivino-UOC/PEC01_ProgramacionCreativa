@@ -4,23 +4,22 @@
 
 void dibujarInfinito(
   float descanso,
+  float atascoIda,
   float trabajo,
-  float atascos,
+  float atascoVuelta,
   float personal
 ) {
 
-  // 1. Primero dibujamos la carretera base (borde oscuro)
   dibujarBaseCarretera();
 
-  // 2. Después pintamos el interior con colores proporcionales
   dibujarSegmentosColoreados(
     descanso,
+    atascoIda,
     trabajo,
-    atascos,
+    atascoVuelta,
     personal
   );
 
-  // 3. Por último, la línea central discontinua
   dibujarLineaCentral();
 }
 
@@ -55,42 +54,52 @@ void dibujarBaseCarretera() {
 
 void dibujarSegmentosColoreados(
   float descanso,
+  float atascoIda,
   float trabajo,
-  float atascos,
+  float atascoVuelta,
   float personal
 ) {
 
-  // Convertimos las horas a proporciones de 0 a 1
   float pDescanso = descanso / 24.0;
-  float pAtascos  = atascos / 24.0;
-  float pTrabajo  = trabajo / 24.0;
+  float pAtascoIda = atascoIda / 24.0;
+  float pTrabajo = trabajo / 24.0;
+  float pAtascoVuelta = atascoVuelta / 24.0;
   float pPersonal = personal / 24.0;
 
-  // Límites acumulados
   float limite1 = pDescanso;
-  float limite2 = limite1 + pAtascos;
+  float limite2 = limite1 + pAtascoIda;
   float limite3 = limite2 + pTrabajo;
-  float limite4 = limite3 + pPersonal; // debería ser 1.0
+  float limite4 = limite3 + pAtascoVuelta;
+  float limite5 = limite4 + pPersonal;
 
   noFill();
   strokeWeight(56);
 
-  // Recorremos el infinito por pequeños tramos
   float paso = 0.01;
 
   for (float t = 0; t < TWO_PI; t += paso) {
 
-    // Progreso total de 0 a 1 a lo largo del símbolo
     float progreso = t / TWO_PI;
 
-    // Elegimos color según el tramo
-    stroke(colorSegunProgreso(
-      progreso,
-      limite1,
-      limite2,
-      limite3,
-      limite4
-    ));
+    color c;
+
+    if (progreso < limite1) {
+      c = colorDescanso;
+    } 
+    else if (progreso < limite2) {
+      c = colorAtasco;
+    } 
+    else if (progreso < limite3) {
+      c = colorTrabajo;
+    } 
+    else if (progreso < limite4) {
+      c = colorAtasco;
+    } 
+    else {
+      c = colorPersonal;
+    }
+
+    stroke(c);
 
     float x1 = width/2 + infinitoAncho * sin(t);
     float y1 = infinitoY + infinitoAlto * sin(t) * cos(t);
