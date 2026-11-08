@@ -24,24 +24,26 @@ void dibujarSelectorDias() {
       inicio +
       i * (anchoBotonDia + espacioBotones);
 
-    // Fondo botón
-    if (i == diaSeleccionado) {
+      if (i == diaSeleccionado) {
 
-      // Día seleccionado
-      fill(60, 120, 220);
+        // Día seleccionado
+        fill(60, 120, 220);
+        stroke(30, 40, 50);
+        strokeWeight(3);
 
-    } else if (modoAcumulado && i < diaSeleccionado) {
+      } else if (modoAcumulado && i < diaSeleccionado) {
 
-      // Días anteriores incluidos en el acumulado
-      fill(75, 100, 145);
+        // Días anteriores incluidos en el acumulado
+        fill(60, 120, 220);
+        stroke(80, 90, 100);
+        strokeWeight(1);
 
-    } else {
+      } else {
 
-      // Días no seleccionados
-      fill(60, 70, 80);
-    }
-
-    noStroke();
+        // Días no incluidos
+        fill(60, 70, 80);
+        noStroke();
+      }
 
     rect(
       x,

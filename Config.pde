@@ -37,7 +37,7 @@ color colorFondo = color(238, 242, 245);
 // Colores de las actividades
 color colorDescanso = color(60, 110, 170);
 color colorTrabajo  = color(245, 190, 55);
-color colorAtasco   = color(225, 75, 65);
+color colorAtasco   = color(165, 80, 190);
 color colorPersonal = color(55, 180, 105);
 
 // Color de la carretera
