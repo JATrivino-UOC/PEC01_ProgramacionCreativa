@@ -83,11 +83,14 @@ void draw() {
 
   if (modoAcumulado) {
 
-    String diaInicio = tabla.getRow(0).getString("dia");
-    String diaFin = tabla.getRow(diaSeleccionado).getString("dia");
+    String diaInicio =
+      tabla.getRow(0).getString("dia");
+
+    String diaFin =
+      tabla.getRow(diaSeleccionado).getString("dia");
 
     dibujarTitulo(
-      diaInicio + " - " + diaFin,
+      "De " + diaInicio + " a " + diaFin,
       "Acumulado"
     );
 
@@ -95,7 +98,7 @@ void draw() {
 
     dibujarTitulo(
       dia,
-      tipo
+      ""
     );
   }
 

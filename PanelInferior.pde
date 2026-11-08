@@ -156,8 +156,27 @@ void dibujarDetalleDia(
   textAlign(LEFT, CENTER);
   textSize(18);
 
+  String textoPeriodo;
+
+  if (modoAcumulado) {
+
+    String diaInicio =
+      tabla.getRow(0).getString("dia");
+
+    String diaFin =
+      tabla.getRow(diaSeleccionado).getString("dia");
+
+    textoPeriodo =
+      "De " + diaInicio + " a " + diaFin;
+
+  } else {
+
+    textoPeriodo =
+      tabla.getRow(diaSeleccionado).getString("dia");
+  }
+
   text(
-    dia + " - " + tipo,
+    textoPeriodo,
     x + 15,
     y + 22
   );

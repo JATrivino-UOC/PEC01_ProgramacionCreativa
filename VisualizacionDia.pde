@@ -8,22 +8,50 @@ void dibujarTitulo(
 ) {
 
   fill(30);
+  textAlign(CENTER, CENTER);
 
+  // Título principal
   textSize(42);
 
   text(
     "Mi semana en bucle",
-    width/2,
+    width / 2,
     55
   );
 
-  textSize(22);
 
-  text(
-    dia + " · " + tipo,
-    width/2,
-    100
-  );
+  // Modo acumulado
+  if (tipo.equals("Acumulado")) {
+
+    // Rango de días
+    textSize(22);
+
+    text(
+      dia,
+      width / 2,
+      100
+    );
+
+    // Texto secundario
+    textSize(15);
+
+    text(
+      "Acumulado",
+      width / 2,
+      125
+    );
+
+  } else {
+
+    // Modo diario
+    textSize(22);
+
+    text(
+      dia + " · " + tipo,
+      width / 2,
+      100
+    );
+  }
 }
 
 
