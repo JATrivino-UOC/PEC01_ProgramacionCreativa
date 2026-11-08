@@ -25,3 +25,32 @@ void cargarDatos() {
 TableRow obtenerDiaSeleccionado() {
   return tabla.getRow(diaSeleccionado);
 }
+
+float[] obtenerDatosAcumulados() {
+
+  float descanso = 0;
+  float atascoIda = 0;
+  float trabajo = 0;
+  float atascoVuelta = 0;
+  float personal = 0;
+
+  // Sumamos desde el lunes hasta el día seleccionado
+  for (int i = 0; i <= diaSeleccionado; i++) {
+
+    TableRow fila = tabla.getRow(i);
+
+    descanso += fila.getFloat("descanso");
+    atascoIda += fila.getFloat("atasco_ida");
+    trabajo += fila.getFloat("trabajo");
+    atascoVuelta += fila.getFloat("atasco_vuelta");
+    personal += fila.getFloat("personal");
+  }
+
+  return new float[] {
+    descanso,
+    atascoIda,
+    trabajo,
+    atascoVuelta,
+    personal
+  };
+}

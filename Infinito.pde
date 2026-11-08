@@ -60,11 +60,26 @@ void dibujarSegmentosColoreados(
   float personal
 ) {
 
-  float pDescanso = descanso / 24.0;
-  float pAtascoIda = atascoIda / 24.0;
-  float pTrabajo = trabajo / 24.0;
-  float pAtascoVuelta = atascoVuelta / 24.0;
-  float pPersonal = personal / 24.0;
+  float totalHoras =
+    descanso +
+    atascoIda +
+    trabajo +
+    atascoVuelta +
+    personal;
+
+  float escalaHoras;
+
+  if (modoAcumulado) {
+    escalaHoras = 120.0;
+  } else {
+    escalaHoras = totalHoras;
+  }
+
+  float pDescanso = descanso / escalaHoras;
+  float pAtascoIda = atascoIda / escalaHoras;
+  float pTrabajo = trabajo / escalaHoras;
+  float pAtascoVuelta = atascoVuelta / escalaHoras;
+  float pPersonal = personal / escalaHoras;
 
   float limite1 = pDescanso;
   float limite2 = limite1 + pAtascoIda;
@@ -83,31 +98,51 @@ void dibujarSegmentosColoreados(
 
     color c;
 
-    if (progreso < limite1) {
-      c = colorDescanso;
-    } 
-    else if (progreso < limite2) {
-      c = colorAtasco;
-    } 
-    else if (progreso < limite3) {
-      c = colorTrabajo;
-    } 
-    else if (progreso < limite4) {
-      c = colorAtasco;
-    } 
-    else {
-      c = colorPersonal;
+    if (progreso < limite5) {
+
+      if (progreso < limite1)
+        c = colorDescanso;
+
+      else if (progreso < limite2)
+        c = colorAtasco;
+
+      else if (progreso < limite3)
+        c = colorTrabajo;
+
+      else if (progreso < limite4)
+        c = colorAtasco;
+
+      else
+        c = colorPersonal;
+
+
+      stroke(c);
+
+      float x1 =
+        width/2 + infinitoAncho * sin(t);
+
+      float y1 =
+        infinitoY +
+        infinitoAlto * sin(t) * cos(t);
+
+
+      float x2 =
+        width/2 + infinitoAncho * sin(t + paso);
+
+      float y2 =
+        infinitoY +
+        infinitoAlto *
+        sin(t + paso) *
+        cos(t + paso);
+
+
+      line(
+        x1,
+        y1,
+        x2,
+        y2
+      );
     }
-
-    stroke(c);
-
-    float x1 = width/2 + infinitoAncho * sin(t);
-    float y1 = infinitoY + infinitoAlto * sin(t) * cos(t);
-
-    float x2 = width/2 + infinitoAncho * sin(t + paso);
-    float y2 = infinitoY + infinitoAlto * sin(t + paso) * cos(t + paso);
-
-    line(x1, y1, x2, y2);
   }
 }
 

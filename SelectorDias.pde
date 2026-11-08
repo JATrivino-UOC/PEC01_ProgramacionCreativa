@@ -14,8 +14,18 @@ void dibujarSelectorDias() {
 
     // Fondo botón
     if (i == diaSeleccionado) {
+
+      // Día seleccionado
       fill(60, 120, 220);
+
+    } else if (modoAcumulado && i < diaSeleccionado) {
+
+      // Días anteriores incluidos en el acumulado
+      fill(75, 100, 145);
+
     } else {
+
+      // Días no seleccionados
       fill(60, 70, 80);
     }
 
@@ -99,4 +109,52 @@ float calcularInicioSelector() {
       (tabla.getRowCount() - 1) * espacioBotones
     )
   ) / 2;
+}
+
+void dibujarBotonAcumulado() {
+
+  // Centramos el botón horizontalmente
+  botonAcumuladoX =
+    width / 2 - botonAcumuladoW / 2;
+
+  // Color según esté activado o no
+  if (modoAcumulado) {
+    fill(60, 120, 220);
+  } else {
+    fill(60, 70, 80);
+  }
+
+  noStroke();
+
+  rect(
+    botonAcumuladoX,
+    botonAcumuladoY,
+    botonAcumuladoW,
+    botonAcumuladoH,
+    8
+  );
+
+  // Texto
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(14);
+
+  text(
+    "Acumulado",
+    botonAcumuladoX + botonAcumuladoW / 2,
+    botonAcumuladoY + botonAcumuladoH / 2
+  );
+}
+
+void comprobarBotonAcumulado() {
+
+  if (
+    mouseX >= botonAcumuladoX &&
+    mouseX <= botonAcumuladoX + botonAcumuladoW &&
+    mouseY >= botonAcumuladoY &&
+    mouseY <= botonAcumuladoY + botonAcumuladoH
+  ) {
+
+    modoAcumulado = !modoAcumulado;
+  }
 }

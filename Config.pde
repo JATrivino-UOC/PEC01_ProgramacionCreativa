@@ -2,6 +2,16 @@
 // CONFIGURACIÓN GENERAL
 // ======================================================
 
+// Indica si la aplicación está en modo diaraio o acumulado
+boolean modoAcumulado = false;
+
+// Definen la posición y tamaño del botón acumulado
+float botonAcumuladoX;
+float botonAcumuladoY = 475;
+
+float botonAcumuladoW = 150;
+float botonAcumuladoH = 36;
+
 // Día seleccionado inicialmente
 int diaSeleccionado = 0;
 

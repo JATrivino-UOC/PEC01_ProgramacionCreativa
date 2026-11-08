@@ -4,6 +4,8 @@
 
 void dibujarPanelInferior() {
 
+  dibujarBotonAcumulado();
+
   dibujarSelectorDias();
 
   TableRow fila = obtenerDiaSeleccionado();
@@ -11,11 +13,42 @@ void dibujarPanelInferior() {
   String dia = fila.getString("dia");
   String tipo = fila.getString("tipo");
 
-  float descanso = fila.getFloat("descanso");
-  float atascoIda = fila.getFloat("atasco_ida");
-  float trabajo = fila.getFloat("trabajo");
-  float atascoVuelta = fila.getFloat("atasco_vuelta");
-  float personal = fila.getFloat("personal");
+  float descanso;
+  float atascoIda;
+  float trabajo;
+  float atascoVuelta;
+  float personal;
+
+  float totalHoras;
+
+
+  // =====================================
+  // DATOS DEL PANEL INFERIOR
+  // =====================================
+
+  if (modoAcumulado) {
+
+    float[] acumulado = obtenerDatosAcumulados();
+
+    descanso = acumulado[0];
+    atascoIda = acumulado[1];
+    trabajo = acumulado[2];
+    atascoVuelta = acumulado[3];
+    personal = acumulado[4];
+
+    // 24 horas por cada día incluido
+    totalHoras = 24.0 * (diaSeleccionado + 1);
+
+  } else {
+
+    descanso = fila.getFloat("descanso");
+    atascoIda = fila.getFloat("atasco_ida");
+    trabajo = fila.getFloat("trabajo");
+    atascoVuelta = fila.getFloat("atasco_vuelta");
+    personal = fila.getFloat("personal");
+
+    totalHoras = 24.0;
+  }
 
   dibujarDetalleDia(
     dia,
@@ -24,7 +57,8 @@ void dibujarPanelInferior() {
     atascoIda,
     trabajo,
     atascoVuelta,
-    personal
+    personal,
+    totalHoras
   );
 
   dibujarLeyendaActividades();
@@ -39,7 +73,8 @@ void dibujarDetalleDia(
   float atascoIda,
   float trabajo,
   float atascoVuelta,
-  float personal
+  float personal,
+  float totalHoras
 ) {
 
   // Los rectángulos se dibujan desde la esquina superior izquierda
@@ -49,7 +84,7 @@ void dibujarDetalleDia(
   // COMPROBACIÓN DE HORAS
   // =====================================
 
-  float totalHoras =
+  float totalComprobacion =
     descanso +
     atascoIda +
     trabajo +
@@ -63,7 +98,7 @@ void dibujarDetalleDia(
     ", trabajo: " + trabajo +
     ", atasco vuelta: " + atascoVuelta +
     ", personal: " + personal +
-    ", TOTAL: " + totalHoras
+    ", TOTAL: " + totalComprobacion
   );
 
 
@@ -119,13 +154,28 @@ void dibujarDetalleDia(
     y + 48;
 
   // Cada hora ocupa esta cantidad de píxeles
-  float escala =
-    barraW / 24.0;
+  float escala;
+
+  if (modoAcumulado) {
+    escala = barraW / 120.0;
+  } else {
+    escala = barraW / 24.0;
+  }
 
   float actualX =
     barraX;
 
   noStroke();
+
+  // Fondo completo de la barra
+  fill(60, 70, 80);
+
+  rect(
+    barraX,
+    barraY,
+    barraW,
+    barraH
+  );
 
 
   // -------------------------------------
@@ -230,12 +280,22 @@ void dibujarDetalleDia(
     barraY + barraH + 18
   );
 
-  text(
-    "24:00",
-    barraX + barraW,
-    barraY + barraH + 18
-  );
+  if (modoAcumulado) {
 
+    text(
+      "120 h",
+      barraX + barraW,
+      barraY + barraH + 18
+    );
+
+  } else {
+
+    text(
+      "24:00",
+      barraX + barraW,
+      barraY + barraH + 18
+    );
+  }
 
   // =====================================
   // DATOS INFERIORES
