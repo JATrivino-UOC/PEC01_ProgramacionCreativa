@@ -166,8 +166,15 @@ void dibujarDetalleDia(
     String diaFin =
       tabla.getRow(diaSeleccionado).getString("dia");
 
-    textoPeriodo =
-      "De " + diaInicio + " a " + diaFin;
+    if (diaSeleccionado == 0) {
+
+      textoPeriodo = diaInicio;
+
+    } else {
+
+      textoPeriodo =
+        "De " + diaInicio + " a " + diaFin;
+    }
 
   } else {
 

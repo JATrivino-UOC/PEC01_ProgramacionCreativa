@@ -92,8 +92,20 @@ void draw() {
     String diaFin =
       tabla.getRow(diaSeleccionado).getString("dia");
 
+    String textoPeriodo;
+
+    if (diaSeleccionado == 0) {
+
+      textoPeriodo = diaInicio;
+
+    } else {
+
+      textoPeriodo =
+        "De " + diaInicio + " a " + diaFin;
+    }
+
     dibujarTitulo(
-      "De " + diaInicio + " a " + diaFin,
+      textoPeriodo,
       "Acumulado"
     );
 
