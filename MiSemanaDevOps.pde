@@ -20,6 +20,11 @@ void setup() {
   textAlign(CENTER, CENTER);
 
   cargarDatos();
+
+  iconoDescanso = loadImage("iconos/icono_descanso.png");
+  iconoTrabajo = loadImage("iconos/icono_trabajo.png");
+  iconoAtasco = loadImage("iconos/icono_atasco.png");
+  iconoPersonal = loadImage("iconos/icono_personal.png");
 }
 
 

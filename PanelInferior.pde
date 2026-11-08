@@ -325,95 +325,105 @@ void dibujarDetalleDia(
   // DATOS INFERIORES
   // =====================================
 
-  float iconY =
-    y + 130;
+  float iconY = y + 130;
+  float tamIcono = 26;
+
+  imageMode(CENTER);
 
   textSize(13);
-
-
-  // DESCANSO
-  fill(colorDescanso);
-  ellipse(
-    x + 55,
-    iconY,
-    18,
-    18
-  );
-
-  fill(230);
   textAlign(LEFT, CENTER);
 
-  text(
-    "Descanso\n" +
-    descanso + " h",
-    x + 72,
-    iconY
-  );
 
+  // -------------------------------------
+  // DESCANSO
+  // -------------------------------------
 
-  // TRABAJO
-  fill(colorTrabajo);
-
-  rect(
-    x + 210,
-    iconY - 9,
-    18,
-    18,
-    3
+  image(
+    iconoDescanso,
+    x + 55,
+    iconY,
+    tamIcono,
+    tamIcono
   );
 
   fill(230);
 
   text(
-    "Trabajo\n" +
-    trabajo + " h",
-    x + 235,
+    "Descanso\n" + nf(descanso, 0, 1) + " h",
+    x + 75,
     iconY
   );
 
 
+  // -------------------------------------
+  // TRABAJO
+  // -------------------------------------
+
+  image(
+    iconoTrabajo,
+    x + 210,
+    iconY,
+    tamIcono,
+    tamIcono
+  );
+
+  fill(230);
+
+  text(
+    "Trabajo\n" + nf(trabajo, 0, 1) + " h",
+    x + 230,
+    iconY
+  );
+
+
+  // -------------------------------------
   // ATASCOS
+  // -------------------------------------
+
   float totalAtascos =
     atascoIda +
     atascoVuelta;
 
-  fill(colorAtasco);
-
-  ellipse(
+  image(
+    iconoAtasco,
     x + 365,
     iconY,
-    18,
-    18
+    tamIcono,
+    tamIcono
   );
 
   fill(230);
 
   text(
-    "Atascos\n" +
-    totalAtascos + " h",
-    x + 382,
+    "Atascos\n" + nf(totalAtascos, 0, 1) + " h",
+    x + 385,
     iconY
   );
 
 
+  // -------------------------------------
   // TIEMPO PERSONAL
-  fill(colorPersonal);
+  // -------------------------------------
 
-  ellipse(
+  image(
+    iconoPersonal,
     x + 505,
     iconY,
-    18,
-    18
+    tamIcono,
+    tamIcono
   );
 
   fill(230);
 
   text(
-    "Personal\n" +
-    personal + " h",
-    x + 522,
+    "Personal\n" + nf(personal, 0, 1) + " h",
+    x + 525,
     iconY
   );
+
+
+  // Restauramos el modo habitual
+  imageMode(CORNER);
 }
 
 
@@ -448,6 +458,7 @@ void dibujarLeyendaActividades() {
   dibujarElementoLeyenda(
     x + 20,
     y + 55,
+    iconoTrabajo,
     colorTrabajo,
     "Trabajo"
   );
@@ -455,6 +466,7 @@ void dibujarLeyendaActividades() {
   dibujarElementoLeyenda(
     x + 20,
     y + 85,
+    iconoAtasco,
     colorAtasco,
     "Desplazamiento / atasco"
   );
@@ -462,6 +474,7 @@ void dibujarLeyendaActividades() {
   dibujarElementoLeyenda(
     x + 20,
     y + 115,
+    iconoPersonal,
     colorPersonal,
     "Tiempo personal"
   );
@@ -469,6 +482,7 @@ void dibujarLeyendaActividades() {
   dibujarElementoLeyenda(
     x + 20,
     y + 145,
+    iconoDescanso,
     colorDescanso,
     "Descanso"
   );
@@ -482,33 +496,52 @@ void dibujarLeyendaActividades() {
 // categoría de actividad.
 
 void dibujarElementoLeyenda(
-  float x,
-  float y,
-  color c,
-  String texto
-) {
+    float x,
+    float y,
+    PImage icono,
+    color c,
+    String texto
+  ) {
 
-  noStroke();
-  fill(c);
+    float tamIcono = 26;
+    float tamColor = 18;
 
-  rect(
-    x,
-    y - 10,
-    28,
-    20,
-    5
-  );
+    imageMode(CENTER);
 
-  fill(230);
-  textSize(14);
-  textAlign(LEFT, CENTER);
+    // Icono
+    image(
+      icono,
+      x + tamIcono / 2,
+      y,
+      tamIcono,
+      tamIcono
+    );
 
-  text(
-    texto,
-    x + 40,
-    y
-  );
-}
+    // Muestra del color asociado
+    noStroke();
+    fill(c);
+
+    rect(
+      x + 35,
+      y - tamColor / 2,
+      tamColor,
+      tamColor,
+      4
+    );
+
+    // Texto
+    fill(230);
+    textSize(14);
+    textAlign(LEFT, CENTER);
+
+    text(
+      texto,
+      x + 65,
+      y
+    );
+
+    imageMode(CORNER);
+  }
 
 
 // ------------------------------------------------------

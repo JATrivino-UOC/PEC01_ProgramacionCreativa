@@ -83,3 +83,14 @@ float barraAlto = 55;
 float selectorY = 525;
 float anchoBotonDia = 150;
 float espacioBotones = 20;
+
+// ------------------------------------------------------
+// ICONOS DE ACTIVIDADES
+// ------------------------------------------------------
+// Imágenes utilizadas como apoyo visual para identificar
+// cada una de las categorías de actividad.
+
+PImage iconoDescanso;
+PImage iconoTrabajo;
+PImage iconoAtasco;
+PImage iconoPersonal;
