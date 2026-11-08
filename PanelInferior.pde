@@ -1,6 +1,18 @@
 // ======================================================
-// PANEL INFERIOR COMPLETO
+// PANEL INFERIOR
 // ======================================================
+// Este archivo contiene las funciones encargadas de dibujar
+// la zona inferior de la interfaz: selector de días,
+// barra temporal, leyenda y resumen semanal.
+// ======================================================
+
+
+// ------------------------------------------------------
+// DIBUJO GENERAL DEL PANEL INFERIOR
+// ------------------------------------------------------
+// Coordina el dibujo de los distintos elementos de la zona
+// inferior y obtiene los datos diarios o acumulados según
+// el modo de visualización activo.
 
 void dibujarPanelInferior() {
 
@@ -65,6 +77,18 @@ void dibujarPanelInferior() {
 
   dibujarResumenSemanal();
 }
+
+
+// ------------------------------------------------------
+// DETALLE TEMPORAL
+// ------------------------------------------------------
+// Dibuja la barra temporal y los valores correspondientes
+// al día seleccionado.
+//
+// En modo diario, la barra representa 24 horas.
+// En modo acumulado, mantiene el mismo tamaño visual,
+// pero utiliza una escala fija de 120 horas y se va
+// completando progresivamente a lo largo de la semana.
 
 void dibujarDetalleDia(
   String dia,
@@ -392,6 +416,13 @@ void dibujarDetalleDia(
   );
 }
 
+
+// ------------------------------------------------------
+// LEYENDA DE ACTIVIDADES
+// ------------------------------------------------------
+// Muestra la relación entre los colores utilizados en la
+// visualización y las distintas categorías de actividad.
+
 void dibujarLeyendaActividades() {
 
   float x = 690;
@@ -443,6 +474,13 @@ void dibujarLeyendaActividades() {
   );
 }
 
+
+// ------------------------------------------------------
+// ELEMENTO INDIVIDUAL DE LA LEYENDA
+// ------------------------------------------------------
+// Dibuja una muestra de color junto al nombre de una
+// categoría de actividad.
+
 void dibujarElementoLeyenda(
   float x,
   float y,
@@ -471,6 +509,14 @@ void dibujarElementoLeyenda(
     y
   );
 }
+
+
+// ------------------------------------------------------
+// RESUMEN SEMANAL
+// ------------------------------------------------------
+// Recorre todos los registros del CSV y calcula los totales
+// semanales de trabajo, desplazamientos, tiempo personal
+// y descanso.
 
 void dibujarResumenSemanal() {
 
@@ -546,6 +592,13 @@ void dibujarResumenSemanal() {
     yTexto + 90
   );
 }
+
+
+// ------------------------------------------------------
+// DATO DEL RESUMEN
+// ------------------------------------------------------
+// Muestra el nombre de una categoría y su valor total
+// expresado en horas.
 
 void dibujarDatoResumen(
   String texto,

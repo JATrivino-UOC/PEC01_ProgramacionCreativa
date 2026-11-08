@@ -1,6 +1,18 @@
 // ======================================================
-// DIBUJAR SELECTOR DE DÍAS
+// SELECTOR DE DÍAS Y MODO ACUMULADO
 // ======================================================
+// Este archivo contiene las funciones encargadas de dibujar
+// los botones de los días laborables, gestionar su selección
+// y controlar la activación del modo acumulado.
+// ======================================================
+
+
+// ------------------------------------------------------
+// DIBUJO DEL SELECTOR DE DÍAS
+// ------------------------------------------------------
+// Dibuja los cinco botones correspondientes a los días
+// laborables y modifica su aspecto según estén seleccionados
+// o formen parte del acumulado.
 
 void dibujarSelectorDias() {
 
@@ -69,9 +81,11 @@ void dibujarSelectorDias() {
 }
 
 
-// ======================================================
-// COMPROBAR CLIC EN UN DÍA
-// ======================================================
+// ------------------------------------------------------
+// SELECCIÓN DE DÍA
+// ------------------------------------------------------
+// Comprueba si el usuario ha pulsado alguno de los botones
+// y actualiza el índice del día seleccionado.
 
 void comprobarSeleccionDia() {
 
@@ -96,9 +110,11 @@ void comprobarSeleccionDia() {
 }
 
 
-// ======================================================
-// CALCULAR POSICIÓN DEL SELECTOR
-// ======================================================
+// ------------------------------------------------------
+// POSICIONAMIENTO DEL SELECTOR
+// ------------------------------------------------------
+// Calcula la posición horizontal inicial necesaria para
+// mantener centrado el conjunto de botones en la ventana.
 
 float calcularInicioSelector() {
 
@@ -110,6 +126,12 @@ float calcularInicioSelector() {
     )
   ) / 2;
 }
+
+// ------------------------------------------------------
+// BOTÓN ACUMULADO
+// ------------------------------------------------------
+// Dibuja el botón que permite activar o desactivar el modo
+// acumulado y cambia su aspecto según su estado.
 
 void dibujarBotonAcumulado() {
 
@@ -145,6 +167,13 @@ void dibujarBotonAcumulado() {
     botonAcumuladoY + botonAcumuladoH / 2
   );
 }
+
+
+// ------------------------------------------------------
+// ACTIVACIÓN DEL MODO ACUMULADO
+// ------------------------------------------------------
+// Comprueba si se ha pulsado el botón Acumulado y alterna
+// entre la visualización diaria y la acumulada.
 
 void comprobarBotonAcumulado() {
 

@@ -1,6 +1,17 @@
 // ======================================================
-// DIBUJAR SÍMBOLO DE INFINITO CON COLORES PROPORCIONALES
+// VISUALIZACIÓN DEL SÍMBOLO DE INFINITO
 // ======================================================
+// Este archivo contiene las funciones encargadas de dibujar
+// el símbolo de infinito y de representar sobre él la
+// distribución proporcional del tiempo mediante colores.
+// ======================================================
+
+
+// ------------------------------------------------------
+// DIBUJO PRINCIPAL DEL INFINITO
+// ------------------------------------------------------
+// Coordina el dibujo de la base, los segmentos coloreados
+// y la línea central del símbolo.
 
 void dibujarInfinito(
   float descanso,
@@ -24,9 +35,11 @@ void dibujarInfinito(
 }
 
 
-// ======================================================
-// BASE OSCURA DE LA CARRETERA
-// ======================================================
+// ------------------------------------------------------
+// BASE DEL SÍMBOLO
+// ------------------------------------------------------
+// Dibuja el recorrido completo del infinito utilizando
+// el color base de la carretera.
 
 void dibujarBaseCarretera() {
 
@@ -48,9 +61,15 @@ void dibujarBaseCarretera() {
 }
 
 
-// ======================================================
-// SEGMENTOS DE COLOR SEGÚN LAS HORAS
-// ======================================================
+// ------------------------------------------------------
+// SEGMENTOS PROPORCIONALES
+// ------------------------------------------------------
+// Calcula qué proporción del recorrido corresponde a cada
+// actividad y colorea el símbolo según esos valores.
+//
+// En modo diario, el recorrido representa 24 horas.
+// En modo acumulado, el recorrido completo representa
+// las 120 horas de los cinco días laborables.
 
 void dibujarSegmentosColoreados(
   float descanso,
@@ -171,9 +190,11 @@ color colorSegunProgreso(
 }
 
 
-// ======================================================
-// LÍNEA CENTRAL DISCONTINUA
-// ======================================================
+// ------------------------------------------------------
+// LÍNEA CENTRAL
+// ------------------------------------------------------
+// Dibuja una línea discontinua sobre el recorrido para
+// reforzar visualmente la apariencia de carretera.
 
 void dibujarLineaCentral() {
 

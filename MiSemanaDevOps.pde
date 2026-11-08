@@ -1,11 +1,17 @@
-/*
-  MI SEMANA EN BUCLE
-  ------------------
-  Visualización de teletrabajo frente a trabajo presencial.
+// ======================================================
+// PROGRAMA PRINCIPAL
+// ======================================================
+// Este archivo controla la inicialización del programa,
+// la actualización de la visualización y la interacción
+// principal mediante el ratón.
+// ======================================================
 
-  Los datos se cargan desde:
-  data/datos_semana.csv
-*/
+
+// ------------------------------------------------------
+// CONFIGURACIÓN INICIAL
+// ------------------------------------------------------
+// Define el tamaño de la ventana, activa el suavizado
+// gráfico y carga los datos externos desde el archivo CSV.
 
 void setup() {
   size(1200, 800);
@@ -15,6 +21,21 @@ void setup() {
 
   cargarDatos();
 }
+
+
+
+
+// ------------------------------------------------------
+// ACTUALIZACIÓN DE LA VISUALIZACIÓN
+// ------------------------------------------------------
+// Se ejecuta continuamente y actualiza la interfaz según
+// el día seleccionado y el modo de visualización activo.
+//
+// En modo diario se utilizan únicamente los datos del día
+// seleccionado.
+//
+// En modo acumulado se suman los datos desde el lunes
+// hasta el día seleccionado.
 
 void draw() {
 
@@ -83,6 +104,14 @@ void draw() {
 
   dibujarPanelInferior();
 }
+
+
+// ------------------------------------------------------
+// INTERACCIÓN CON EL RATÓN
+// ------------------------------------------------------
+// Comprueba si el usuario ha pulsado el botón Acumulado
+// o alguno de los botones correspondientes a los días
+// de la semana.
 
 void mousePressed() {
 

@@ -1,9 +1,19 @@
+// ======================================================
+// GESTIÓN DE DATOS
+// ======================================================
+// Este archivo se encarga de cargar los datos externos
+// desde el archivo CSV y de proporcionar las funciones
+// necesarias para consultar los datos diarios y acumulados.
+// ======================================================
+
 Table tabla;
 
 
-// ======================================================
-// CARGAR DATOS
-// ======================================================
+// ------------------------------------------------------
+// CARGA DE DATOS
+// ------------------------------------------------------
+// Importa el archivo CSV mediante loadTable() utilizando
+// la primera fila como cabecera de las columnas.
 
 void cargarDatos() {
 
@@ -18,13 +28,29 @@ void cargarDatos() {
 }
 
 
-// ======================================================
-// OBTENER FILA DEL DÍA SELECCIONADO
-// ======================================================
+// ------------------------------------------------------
+// OBTENER DÍA SELECCIONADO
+// ------------------------------------------------------
+// Devuelve la fila del CSV correspondiente al día que
+// se encuentra seleccionado actualmente en la interfaz.
 
 TableRow obtenerDiaSeleccionado() {
   return tabla.getRow(diaSeleccionado);
 }
+
+
+// ------------------------------------------------------
+// CÁLCULO DE DATOS ACUMULADOS
+// ------------------------------------------------------
+// Suma los valores desde el lunes hasta el día seleccionado.
+// Los resultados se devuelven en un array siguiendo este
+// orden:
+//
+// 0 -> descanso
+// 1 -> atasco de ida
+// 2 -> trabajo
+// 3 -> atasco de vuelta
+// 4 -> tiempo personal
 
 float[] obtenerDatosAcumulados() {
 
