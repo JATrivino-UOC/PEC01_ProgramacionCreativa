@@ -94,3 +94,12 @@ PImage iconoDescanso;
 PImage iconoTrabajo;
 PImage iconoAtasco;
 PImage iconoPersonal;
+
+
+// ------------------------------------------------------
+// FUENTES
+// ------------------------------------------------------
+// Configuración de la fuentes
+
+PFont fuenteTitulo;
+PFont fuenteNormal;

@@ -14,6 +14,9 @@
 // gráfico y carga los datos externos desde el archivo CSV.
 
 void setup() {
+  fuenteTitulo = createFont("Arial Bold", 42);
+  fuenteNormal = createFont("Arial", 22);
+
   size(1200, 800);
   smooth();
 

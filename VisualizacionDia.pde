@@ -11,13 +11,17 @@ void dibujarTitulo(
   textAlign(CENTER, CENTER);
 
   // Título principal
+  textFont(fuenteTitulo);
   textSize(42);
 
   text(
-    "Mi semana en bucle",
+    "MI SEMANA EN BUCLE",
     width / 2,
     55
   );
+
+// Volvemos a la fuente normal
+textFont(fuenteNormal);
 
 
   // Modo acumulado
