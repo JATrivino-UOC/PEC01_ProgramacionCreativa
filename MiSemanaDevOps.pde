@@ -99,6 +99,16 @@ void draw() {
     );
   }
 
+  dibujarLeyendaInfinito();
+
+  dibujarInfinito(
+    descanso,
+    atascoIda,
+    trabajo,
+    atascoVuelta,
+    personal
+  );
+
   dibujarInfinito(
     descanso,
     atascoIda,
